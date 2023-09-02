@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const {User} = require('../db');
 const nodemailer = require('nodemailer');
 const Mailgen = require('mailgen');
 
@@ -27,7 +27,9 @@ exports.register = async (req, res) => {
 
     const emailTemplate = mailGenerator.generate(email);
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      host: "smtp.ruqtec.com",
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -35,7 +37,7 @@ exports.register = async (req, res) => {
     });
 
     const mailOptions = {
-      from: 'info@ruqtec.com',
+      from: 'dev@ruqtec.com',
       to: newUser.email,
       subject: 'Welcome to Your Website',
       html: emailTemplate,
