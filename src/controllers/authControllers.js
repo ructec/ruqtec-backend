@@ -5,7 +5,7 @@ const Mailgen = require('mailgen');
 exports.register = async (req, res) => {
   try {
     // Create a new user
-    const newUser = {...req.body}
+    const newUser = await User.create({...req.body})
 
     // Send confirmation email
     const mailGenerator = new Mailgen({
