@@ -5,11 +5,11 @@ const Mailgen = require('mailgen');
 exports.register = async (req, res) => {
   try {
     // Create a new user
-    const newUser = await User.create({...req.body})
+    const newUser = {...req.body}
 
     // Send confirmation email
     const mailGenerator = new Mailgen({
-      theme: 'green',
+      theme: 'default',
       product: {
         name: 'RUQTEC',
         link: 'https://ruqtec.com',
@@ -19,13 +19,18 @@ exports.register = async (req, res) => {
 
     const email = {
       body: {
-        name: newUser.firstName,
-        intro: 'Welcome to Ruqtec!', 
+        name: newUser.firstName + newUser.lastName,
+        intro: "Welcome to Ruqtec! We're very excited to have you on board.",
         action: {
-            text: 'Kindly be on look out as we will email you in the next 48hrs on further instructions. Only via this email address.'
+          instructions:
+            "Kindly be on look out as we will email you in the next 48hrs on further instructions. Only via this email address.",
+          button: {
+            color: "blue", // Optional action button color
+            text: "RUQTEC",
+            // link: 'https://mailgen.js/confirm?s=d9729feb74992cc3482b350163a1a010'
+          },
         },
-        outro: "If you have any questions please contact us via this email or +2348061718441"
-        
+        outro: "Need help, or have questions? Just reply to this email or  +2348061718441, we'd love to help.",
       },
     };
 
