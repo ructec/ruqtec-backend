@@ -5,8 +5,7 @@ const Mailgen = require('mailgen');
 exports.register = async (req, res) => {
   try {
     // Create a new user
-    const newUser = new User(req.body);
-    await newUser.save();
+    const newUser = await User.create({...req.body})
 
     // Send confirmation email
     const mailGenerator = new Mailgen({
@@ -27,7 +26,7 @@ exports.register = async (req, res) => {
 
     const emailTemplate = mailGenerator.generate(email);
     const transporter = nodemailer.createTransport({
-      host: "smtp.ruqtec.com",
+      host: "ruqtec.com",
       port: 465,
       secure: true,
       auth: {
