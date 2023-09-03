@@ -9,10 +9,11 @@ exports.register = async (req, res) => {
 
     // Send confirmation email
     const mailGenerator = new Mailgen({
-      theme: 'default',
+      theme: 'green',
       product: {
         name: 'RUQTEC',
         link: 'https://ruqtec.com',
+        logo: 'https://ruqtec.com/Images/logo.png'
       },
     });
 
@@ -20,7 +21,11 @@ exports.register = async (req, res) => {
       body: {
         name: newUser.firstName,
         intro: 'Welcome to Ruqtec!', 
-        // Add more email content as needed
+        action: {
+            text: 'Kindly be on look out as we will email you in the next 48hrs on further instructions. Only via this email address.'
+        },
+        outro: "If you have any questions please contact us via this email or +2348061718441"
+        
       },
     };
 
@@ -38,7 +43,7 @@ exports.register = async (req, res) => {
     const mailOptions = {
       from: 'dev@ruqtec.com',
       to: newUser.email,
-      subject: 'Welcome to Your Website',
+      subject: `Application for${newUser.course} received`,
       html: emailTemplate,
     };
 
