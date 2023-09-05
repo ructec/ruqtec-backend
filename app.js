@@ -22,10 +22,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 // Routes
 app.get('/', (req, res) =>{
-    res.status(200).send('<h1> Hello World API</h1>');
+    res.redirect(301, 'https://ruqtec.com/');
 })
+
 app.use('/api/auth', authRoutes);
 
 app.use('*', (req, res) =>{
