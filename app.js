@@ -23,9 +23,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 // Routes
+app.get('/', (req, res) =>{
+    res.status(200).send('<h1> Hello World API</h1>');
+})
 app.use('/api/auth', authRoutes);
-// ...
 
+app.use('*', (req, res) =>{
+    res.status(404).send('<h1>Invalid API end point</h1>');
+})
 // Start the server
 require('./src/db/').dbServer();
 
