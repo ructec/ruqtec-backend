@@ -5,7 +5,7 @@ require('dotenv').config();
 const authRoutes = require('./src/routes');
 
 const app = express();
-
+//
 // Middleware
 app.use(express.json());
 app.use(require('morgan')('dev'));
